@@ -5,8 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VTOLVR_Translation_tool"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="VTOL VR Translation" Height="450" Width="800" ResizeMode="NoResize">
     <Grid>
-
+        <Label x:Name="label_title" Content="Title" HorizontalAlignment="Center" FontSize="26" Margin="0,95,0,0" VerticalAlignment="Top" Panel.ZIndex="1"/>
+        <Label x:Name="Description" Content="Description" HorizontalAlignment="Center" FontSize="16" Margin="0,150,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="button_previous" Content="Previous" HorizontalAlignment="Left" Margin="310,302,0,0" VerticalAlignment="Top" Click="button_previous_Click"/>
+        <TextBox x:Name="Input" HorizontalAlignment="Center" Margin="0,186,0,0" Text="TextBox" TextWrapping="NoWrap" VerticalAlignment="Top" Width="180" Height="93" AcceptsReturn="True"/>
+        <Button x:Name="button_next" Content="Next" HorizontalAlignment="Left" Margin="461,302,0,0" VerticalAlignment="Top" Click="button_next_Click"/>
+        <Label x:Name="label_index" Content="Index" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="button_save" Content="Save" HorizontalAlignment="Left" Margin="746,10,0,0" VerticalAlignment="Top" Click="button_save_Click"/>
     </Grid>
 </Window>
