@@ -36,6 +36,16 @@ namespace VTOLVR_Translation_tool
 
         }
 
+        public void CreateLanguage(string languageCode)
+        {
+            IEnumerable<dynamic> data = GetAllData();
+
+            foreach (dynamic item in data)
+            {
+                ((IDictionary<String, object>)item).TryAdd(languageCode, string.Empty);
+            }
+        }
+
         public void Save()
         {
             foreach (File file in Files)

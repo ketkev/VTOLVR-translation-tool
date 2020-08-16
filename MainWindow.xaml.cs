@@ -120,5 +120,25 @@ namespace VTOLVR_Translation_tool
             SaveItem();
             dataController.Save();
         }
+
+        private void button_AddLanguage_Click(object sender, RoutedEventArgs e)
+        {
+            button_AddLanguage.Visibility = Visibility.Hidden;
+            textBox_language.Visibility = Visibility.Visible;
+            label_language_prompt.Visibility = Visibility.Visible;
+        }
+
+        private void textBox_language_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                dataController.CreateLanguage(textBox_language.Text);
+                dataController.Save();
+
+                button_AddLanguage.Visibility = Visibility.Visible;
+                textBox_language.Visibility = Visibility.Hidden;
+                label_language_prompt.Visibility = Visibility.Hidden;
+            }
+        }
     }
 }
