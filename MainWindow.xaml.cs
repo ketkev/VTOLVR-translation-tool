@@ -140,5 +140,21 @@ namespace VTOLVR_Translation_tool
                 label_language_prompt.Visibility = Visibility.Hidden;
             }
         }
+
+        private void Input_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                if (Keyboard.Modifiers.HasFlag(ModifierKeys.Shift))
+                {
+                    Input.Text += "\n";
+                    Input.CaretIndex = Input.Text.Length;
+                }
+                else
+                {
+                    GetNext();
+                }
+            }
+        }
     }
 }
