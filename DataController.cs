@@ -29,9 +29,12 @@ namespace VTOLVR_Translation_tool
                    select item;
         }
 
-        public void GetUnfilledData()
+        public IEnumerable<dynamic> GetUnfilledData()
         {
-
+            return from list in Files
+                   from item in list.Data
+                   where (string)((IDictionary<string, object>)item)[CurrentLanguage] == ""
+                   select item;
         }
 
         public void CreateLanguage(string languageCode)

@@ -27,11 +27,25 @@ namespace VTOLVR_Translation_tool
         int index = 0;
         dynamic CurrentItem;
 
+        bool GetUnfilledOnly = false;
+
         public MainWindow()
         {
             InitializeComponent();
 
-            data = dataController.GetAllData();
+            GetData();
+        }
+
+        private void GetData()
+        {
+            if (GetUnfilledOnly)
+            {
+                data = dataController.GetUnfilledData();
+            }
+            else
+            {
+                data = dataController.GetAllData();
+            }
 
             if (data.Count() == 0)
             {
@@ -63,6 +77,15 @@ namespace VTOLVR_Translation_tool
             comboBox.ItemsSource = dataController.Languages;
             comboBox.SelectedItem = dataController.CurrentLanguage;
             comboBox.Items.Refresh();
+
+            if (data.Count() != 0)
+            {
+                HideError();
+            }
+            else
+            {
+                ShowError();
+            }
         }
 
         private void SaveItem()
@@ -106,6 +129,14 @@ namespace VTOLVR_Translation_tool
             button_previous.Visibility = Visibility.Hidden;
             Description.Visibility = Visibility.Hidden;
             Input.Visibility = Visibility.Hidden;
+        }
+
+        private void HideError()
+        {
+            button_next.Visibility = Visibility.Visible;
+            button_previous.Visibility = Visibility.Visible;
+            Description.Visibility = Visibility.Visible;
+            Input.Visibility = Visibility.Visible;
         }
 
         private void button_previous_Click(object sender, RoutedEventArgs e)
@@ -169,6 +200,14 @@ namespace VTOLVR_Translation_tool
             SaveItem();
             dataController.CurrentLanguage = (string)comboBox.SelectedItem;
             UpdateWindow();
+        }
+
+        private void checkBox_unfilled_Click(object sender, RoutedEventArgs e)
+        {
+            CheckBox box = (CheckBox)sender;
+
+            GetUnfilledOnly = (bool)box.IsChecked;
+            GetData();
         }
     }
 }
