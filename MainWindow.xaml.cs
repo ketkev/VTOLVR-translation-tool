@@ -59,12 +59,15 @@ namespace VTOLVR_Translation_tool
             label_title.Content = CurrentItem.en;
             Description.Content = CurrentItem.Description;
             label_index.Content = $"{index}/{data.Count() - 1}";
-            Input.Text = CurrentItem.ko;
+            Input.Text = (string)((IDictionary<string, object>)CurrentItem)[dataController.CurrentLanguage];
+            comboBox.ItemsSource = dataController.Languages;
+            comboBox.SelectedItem = dataController.CurrentLanguage;
+            comboBox.Items.Refresh();
         }
 
         private void SaveItem()
         {
-            CurrentItem.ko = Input.Text;
+            ((IDictionary<string, object>)CurrentItem)[dataController.CurrentLanguage] = Input.Text;
         }
 
         private void GetNext()
@@ -135,6 +138,10 @@ namespace VTOLVR_Translation_tool
                 dataController.CreateLanguage(textBox_language.Text);
                 dataController.Save();
 
+                dataController.Languages.Add(textBox_language.Text);
+
+                UpdateWindow();
+
                 button_AddLanguage.Visibility = Visibility.Visible;
                 textBox_language.Visibility = Visibility.Hidden;
                 label_language_prompt.Visibility = Visibility.Hidden;
@@ -155,6 +162,13 @@ namespace VTOLVR_Translation_tool
                     GetNext();
                 }
             }
+        }
+
+        private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SaveItem();
+            dataController.CurrentLanguage = (string)comboBox.SelectedItem;
+            UpdateWindow();
         }
     }
 }

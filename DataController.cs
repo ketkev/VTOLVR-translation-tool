@@ -12,6 +12,9 @@ namespace VTOLVR_Translation_tool
     {
         List<File> Files;
 
+        public List<string> Languages { get; set; }
+        public string CurrentLanguage { get; set; }
+
         public DataController()
         {
             string[] CSVPaths = GetPaths();
@@ -27,11 +30,6 @@ namespace VTOLVR_Translation_tool
         }
 
         public void GetUnfilledData()
-        {
-
-        }
-
-        public void GetLanguages()
         {
 
         }
@@ -72,8 +70,10 @@ namespace VTOLVR_Translation_tool
                 using CsvReader csv = new CsvReader(reader, CultureInfo.InvariantCulture);
                 var records = csv.GetRecords<dynamic>().ToList();
 
-
                 files.Add(new File(path, records));
+
+                Languages = csv.Context.HeaderRecord.Skip(1).Skip(1).ToList();
+                CurrentLanguage = Languages.FirstOrDefault();
             }
 
             return files;

@@ -15,7 +15,7 @@
         <Label x:Name="label_index" Content="Index" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Button x:Name="button_save" Content="Save" HorizontalAlignment="Left" Margin="746,10,0,0" VerticalAlignment="Top" Click="button_save_Click"/>
         <Button x:Name="button_AddLanguage" Content="Add a new language to ALL files" HorizontalAlignment="Left" Margin="10,380,0,0" VerticalAlignment="Top" Click="button_AddLanguage_Click"/>
-        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="10,340,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="10,340,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="comboBox_SelectionChanged"/>
         <Label x:Name="label" Content="Select language" HorizontalAlignment="Left" Margin="10,295,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="textBox_language" Visibility="Hidden" HorizontalAlignment="Left" Margin="105,380,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" KeyDown="textBox_language_KeyDown"/>
         <Label x:Name="label_language_prompt" Content="Enter language" Visibility="Hidden" HorizontalAlignment="Left" Margin="10,380,0,0" VerticalAlignment="Top"/>
