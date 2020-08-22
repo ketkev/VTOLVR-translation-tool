@@ -79,13 +79,27 @@ namespace VTOLVR_Translation_tool
 
         private void UpdateWindow()
         {
-            label_title.Content = CurrentItem.en;
+            label_title.ToolTip = CurrentItem.en;
             Description.Content = CurrentItem.Description;
             label_index.Content = $"{index}/{data.Count() - 1}";
             Input.Text = (string)((IDictionary<string, object>)CurrentItem)[dataController.CurrentLanguage];
             comboBox.ItemsSource = dataController.Languages;
             comboBox.SelectedItem = dataController.CurrentLanguage;
             comboBox.Items.Refresh();
+
+            if (CurrentItem.en.Contains("\n"))
+            {
+                label_title.Content = $"{CurrentItem.en.Substring(0, CurrentItem.en.IndexOf("\n"))}...";
+            }
+            else
+            {
+                label_title.Content = CurrentItem.en;
+            }
+
+            if (((string)label_title.Content).Length > 25)
+            {
+                label_title.Content = $"{((string)label_title.Content).Substring(0, 25)}...";
+            }
 
             if (data.Count() != 0)
             {
