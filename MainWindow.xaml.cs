@@ -20,7 +20,7 @@ namespace VTOLVR_Translation_tool
     /// </summary>
     public partial class MainWindow : Window
     {
-        DataController dataController = new DataController();
+        DataController dataController;
 
         IEnumerable<dynamic> data;
 
@@ -32,6 +32,15 @@ namespace VTOLVR_Translation_tool
         public MainWindow()
         {
             InitializeComponent();
+
+            try
+            {
+                dataController = new DataController();
+            }
+            catch (InvalidCsvException exception)
+            {
+                MessageBox.Show(exception.Message, "Something went wrong");
+            }
 
             GetData();
         }

@@ -69,14 +69,26 @@ namespace VTOLVR_Translation_tool
 
             foreach (string path in paths)
             {
-                using StreamReader reader = new StreamReader(path);
-                using CsvReader csv = new CsvReader(reader, CultureInfo.InvariantCulture);
-                var records = csv.GetRecords<dynamic>().ToList();
+                try
+                {
+                    using StreamReader reader = new StreamReader(path);
+                    using CsvReader csv = new CsvReader(reader, CultureInfo.InvariantCulture);
+                    var records = csv.GetRecords<dynamic>().ToList();
 
-                files.Add(new File(path, records));
+                    files.Add(new File(path, records));
 
-                Languages = csv.Context.HeaderRecord.Skip(1).Skip(1).ToList();
-                CurrentLanguage = Languages.FirstOrDefault();
+                    Languages = csv.Context.HeaderRecord.Skip(1).Skip(1).ToList();
+                    CurrentLanguage = Languages.FirstOrDefault();
+
+                    if (csv.Context.HeaderRecord.ToList().FindAll(item => item == "Key" || item == "Description" || item == "en").Count != 3)
+                    {
+                        throw new InvalidCsvException($"Invalid CSV. Error in {path}. Make sure your header contains a Key, Description and en column.");
+                    }
+                }
+                catch (CsvHelper.BadDataException exception)
+                {
+                    throw new InvalidCsvException($"Invalid CSV. Error in {path} on line {exception.ReadingContext.RawRow}");
+                }
             }
 
             return files;
