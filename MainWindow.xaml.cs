@@ -27,7 +27,7 @@ namespace VTOLVR_Translation_tool
         int index = 0;
         dynamic CurrentItem;
 
-        bool GetUnfilledOnly = false;
+        bool GetUnfilledOnly = false, ChangeSame = false;
 
         public MainWindow()
         {
@@ -113,7 +113,14 @@ namespace VTOLVR_Translation_tool
 
         private void SaveItem()
         {
-            ((IDictionary<string, object>)CurrentItem)[dataController.CurrentLanguage] = Input.Text;
+            if (ChangeSame)
+            {
+                data.ToList().FindAll(item => item.en == CurrentItem.en).ForEach(item => ((IDictionary<string, object>)item)[dataController.CurrentLanguage] = Input.Text);
+            }
+            else
+            {
+                ((IDictionary<string, object>)CurrentItem)[dataController.CurrentLanguage] = Input.Text;
+            }
         }
 
         private void GetNext()
@@ -148,10 +155,12 @@ namespace VTOLVR_Translation_tool
         {
             label_title.Content = "Something went wrong 😥";
 
+            // Todo: Save this in an array to improve expandability?
             button_next.Visibility = Visibility.Hidden;
             button_previous.Visibility = Visibility.Hidden;
             Description.Visibility = Visibility.Hidden;
             Input.Visibility = Visibility.Hidden;
+            button_repeat.Visibility = Visibility.Hidden;
         }
 
         private void HideError()
@@ -160,6 +169,7 @@ namespace VTOLVR_Translation_tool
             button_previous.Visibility = Visibility.Visible;
             Description.Visibility = Visibility.Visible;
             Input.Visibility = Visibility.Visible;
+            button_repeat.Visibility = Visibility.Visible;
         }
 
         private void CopyEnglishText()
@@ -240,6 +250,13 @@ namespace VTOLVR_Translation_tool
 
             GetUnfilledOnly = (bool)box.IsChecked;
             GetData();
+        }
+
+        private void checkBox_same_Click(object sender, RoutedEventArgs e)
+        {
+            CheckBox box = (CheckBox)sender;
+
+            ChangeSame = (bool)box.IsChecked;
         }
 
         private void button_repeat_Click(object sender, RoutedEventArgs e)
