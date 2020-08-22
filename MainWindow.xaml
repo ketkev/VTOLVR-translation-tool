@@ -20,5 +20,6 @@
         <TextBox x:Name="textBox_language" Visibility="Hidden" HorizontalAlignment="Left" Margin="105,380,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" KeyDown="textBox_language_KeyDown"/>
         <Label x:Name="label_language_prompt" Content="Enter language" Visibility="Hidden" HorizontalAlignment="Left" Margin="10,380,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="checkBox_unfilled" Content="Show unfilled entries only" HorizontalAlignment="Left" Margin="310,385,0,0" VerticalAlignment="Top" Click="checkBox_unfilled_Click"/>
+        <Button x:Name="button_repeat" Content="Copy English text" ToolTip="(Tab)" HorizontalAlignment="Left" Margin="187,223,0,0" VerticalAlignment="Top" Click="button_repeat_Click"/>
     </Grid>
 </Window>

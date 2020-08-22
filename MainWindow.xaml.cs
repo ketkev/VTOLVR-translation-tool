@@ -162,6 +162,11 @@ namespace VTOLVR_Translation_tool
             Input.Visibility = Visibility.Visible;
         }
 
+        private void CopyEnglishText()
+        {
+            Input.Text = CurrentItem.en;
+        }
+
         private void button_previous_Click(object sender, RoutedEventArgs e)
         {
             GetPrevious();
@@ -216,6 +221,10 @@ namespace VTOLVR_Translation_tool
                     GetNext();
                 }
             }
+            else if (e.Key == Key.Tab)
+            {
+                CopyEnglishText();
+            }
         }
 
         private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -231,6 +240,11 @@ namespace VTOLVR_Translation_tool
 
             GetUnfilledOnly = (bool)box.IsChecked;
             GetData();
+        }
+
+        private void button_repeat_Click(object sender, RoutedEventArgs e)
+        {
+            CopyEnglishText();
         }
     }
 }
