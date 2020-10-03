@@ -1,4 +1,4 @@
-# VTOLVR-translation-tool
+# VTOLVR-translation-tool (Obsolete since the introduction of a native translation tool in VTOL VR)
 
 A small tool to help ease the translation of VTOL VR. Instructions on how to use this program can be found [here!](#how-to-use)
 
